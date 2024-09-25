@@ -1,3 +1,6 @@
+import User from "../models/user-model.js";
+import jwtServices from "../service/jwt-service.js";
+
 export const signup = async (req, res) => {
   try {
     const user = await User.create({
@@ -19,6 +22,9 @@ export const login = async (req, res) => {
     }).exec();
 
     if (user && (await user.isValidPassword(req.body.password))) {
+      const token = jwtServices.generateAcesssToken(user);
+      res.json(token);
+    } else {
       res.status(404).json({
         error: "Email or password invalid.",
       });
