@@ -15,6 +15,11 @@ const generateAcesssToken = (user) => {
   return token;
 };
 
+const verifyAcessToken = (token) => {
+  jsonWebToken.verify(token.process.env.JWT_PRIVATE_KEY);
+};
+
 export default {
   generateAcesssToken,
+  verifyAcessToken,
 };

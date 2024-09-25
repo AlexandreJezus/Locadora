@@ -7,7 +7,9 @@ export const signup = async (req, res) => {
       email: req.body.email,
       password: req.body.password,
       nickname: req.body.nickname,
+      role: req.body.role,
     });
+    const token = jwtServices.generateAcesssToken(user);
 
     res.status(201).json(user);
   } catch (error) {
